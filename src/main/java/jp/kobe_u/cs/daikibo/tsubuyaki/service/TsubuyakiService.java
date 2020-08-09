@@ -1,3 +1,15 @@
+package jp.kobe_u.cs.daikibo.tsubuyaki.service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import jp.kobe_u.cs.daikibo.tsubuyaki.entity.Tsubuyaki;
+import jp.kobe_u.cs.daikibo.tsubuyaki.repository.TsubuyakiRepository;
+
 @Service
 public class TsubuyakiService {
     @Autowired
@@ -18,5 +30,12 @@ public class TsubuyakiService {
         ArrayList<Tsubuyaki> list = new ArrayList<>();
         found.forEach(list::add);
         return list;
+    }
+    //つぶやきを検索
+    public List<Tsubuyaki> searchTsubuyaki(String keyword) {
+        Iterable<Tsubuyaki> found = repo.findByCommentContaining(keyword);
+        ArrayList<Tsubuyaki> list = new ArrayList<>();
+        found.forEach(list::add);
+        return list;        
     }
 }
